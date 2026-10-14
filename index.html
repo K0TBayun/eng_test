@@ -145,9 +145,7 @@
   </div>
 
   <script>
-    // ----------------------------------------------------
-    // НАСТРОЙКИ: вставьте ваши данные от Telegram
-    // ----------------------------------------------------
+    // Вставьте вашу ссылку на Google Apps Script (заканчивается на /exec):
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby8iUjjoBd8qdQlVPCvFBVOk9HU8qjTWQvm69ImK3mNkCGSLBlT8poNiFWQgDs-bhps4Q/exec';
 
     // Правильные ответы для автоматического подсчета
@@ -194,7 +192,7 @@
         const response = await fetch(SCRIPT_URL, {
           method: 'POST',
           headers: {
-            'Content-Type': 'text/plain;charset=utf-8' // важно для обхода CORS
+            'Content-Type': 'text/plain;charset=utf-8'
           },
           body: JSON.stringify({
             message: message
@@ -217,7 +215,6 @@
         statusDiv.innerText = 'Произошла ошибка при отправке. Проверьте интернет или обратитесь к автору теста.';
         submitBtn.disabled = false;
         submitBtn.innerText = 'Завершить и отправить';
-      }
       }
     });
   </script>
