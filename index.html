@@ -148,8 +148,7 @@
     // ----------------------------------------------------
     // НАСТРОЙКИ: вставьте ваши данные от Telegram
     // ----------------------------------------------------
-    const TELEGRAM_TOKEN = '8613597550:AAEkJ_88YeilmEBBj945YPWhC8uWjDNtZrE';
-    const CHAT_ID = '183534789';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby8iUjjoBd8qdQlVPCvFBVOk9HU8qjTWQvm69ImK3mNkCGSLBlT8poNiFWQgDs-bhps4Q/exec';
 
     // Правильные ответы для автоматического подсчета
     const correctAnswers = {
@@ -192,15 +191,13 @@
                       `Ответы:\n${detailsText}`;
 
       try {
-        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+        const response = await fetch(SCRIPT_URL, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain;charset=utf-8' // важно для обхода CORS
           },
           body: JSON.stringify({
-            chat_id: CHAT_ID,
-            text: message,
-            parse_mode: 'Markdown'
+            message: message
           })
         });
 
@@ -213,13 +210,14 @@
             </div>
           `;
         } else {
-          throw new Error('Telegram API error');
+          throw new Error('Script error');
         }
       } catch (err) {
         statusDiv.style.color = '#dc2626';
         statusDiv.innerText = 'Произошла ошибка при отправке. Проверьте интернет или обратитесь к автору теста.';
         submitBtn.disabled = false;
         submitBtn.innerText = 'Завершить и отправить';
+      }
       }
     });
   </script>
